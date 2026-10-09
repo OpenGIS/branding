@@ -1,0 +1,275 @@
+// Page layout.
+//
+// Structure consumers copy for a docs page: the site header band, the
+// section nav, the content column, alternating section bands and the
+// footer, plus the narrow-viewport adjustments.
+
+// --- Site header ----------------------------------------------------------
+// The header is a static, full-bleed map band, the ogis.org header pattern:
+// an always-inverted country map fills a 160px band with the white OGIS mark
+// top-left and the Leaflet attribution bottom-right. It sits in normal flow,
+// so it scrolls away with the page and never overlays content. The section
+// nav is a separate row directly below the band.
+//
+// The band bleeds edge to edge, but the logo and the attribution align to
+// the content column (the same centre column the section bands use), so on
+// wide displays they sit inward with the page text instead of hugging the
+// viewport edges. Below the content width the column is the band gutter, so
+// both settle at the band edges.
+
+.site-header {
+  position: static;
+  // Contain the viewer's high z-index Leaflet panes and controls so they can
+  // never paint over the sticky nav as the band scrolls under it.
+  isolation: isolate;
+  // Same centre-column width formula as .ogis-band, so the logo and the
+  // attribution line up exactly with body text and headings.
+  --ogis-header-column: min(
+    100% - 2rem,
+    calc(var(--ogis-content-width) - 2rem)
+  );
+  display: grid;
+  grid-template-columns:
+    minmax(1rem, 1fr)
+    var(--ogis-header-column)
+    minmax(1rem, 1fr);
+  grid-template-rows: 160px;
+  margin: 0;
+  padding: 0;
+  background: var(--ogis-header-bg);
+  border: 0;
+}
+
+// The map fills the band, spanning every column; the logo stacks over it in
+// the same row.
+.site-header .background-map {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  min-height: 0;
+  background: var(--ogis-header-bg);
+}
+
+// The logo sits in the centre column, so its left edge lines up with the
+// page content below it at every width.
+.site-brand {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  justify-self: start;
+  z-index: 1;
+  margin-top: 15px;
+  color: var(--ogis-brand-mark);
+  line-height: 1;
+  text-decoration: none;
+}
+
+// Leaflet pins the attribution to the map's bottom-right. Shift the control
+// cluster inward by the band gutter so its right edge lines up with the
+// content column's right edge on wide displays (and stays at the gutter
+// below the content width). Zero Leaflet's own 10px control margin so the
+// offset lands exactly.
+.site-header .leaflet-bottom.leaflet-right {
+  right: max(0px, calc((100% - var(--ogis-header-column)) / 2));
+}
+
+.site-header .background-map .leaflet-control-attribution {
+  margin-right: 0;
+}
+
+.brand-mark {
+  display: block;
+  width: 40px;
+  height: 40px;
+  color: var(--ogis-brand-mark);
+}
+
+.brand-mark svg,
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-mark svg {
+  fill: currentColor;
+}
+
+.brand-mark img {
+  margin: 0;
+  border: 0;
+}
+
+.brand-name {
+  color: var(--ogis-brand-mark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.brand-name span {
+  color: var(--ogis-brand-accent);
+}
+
+// Section nav: a quiet monospace row directly below the map band. It sticks to
+// the top of the viewport once the header band scrolls away, so the section
+// links stay reachable while the logo and map scroll off. The row is
+// full-bleed with a themed opaque background (no bleed-through); its links and
+// hairline stay on the content column.
+.site-nav {
+  --ogis-nav-inset: max(
+    1rem,
+    calc((100% - (var(--ogis-content-width) - 2rem)) / 2)
+  );
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1.25rem;
+  margin: 0;
+  padding: 0.6rem var(--ogis-nav-inset);
+  background: var(--ogis-bg);
+}
+
+// Hairline aligned to the content column (the band column), not the box.
+.site-nav::after {
+  content: "";
+  position: absolute;
+  right: var(--ogis-nav-inset);
+  bottom: 0;
+  left: var(--ogis-nav-inset);
+  height: 1px;
+  background: var(--ogis-border);
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.2rem 0;
+  color: var(--ogis-muted);
+  font-size: 13px;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-nav a:hover {
+  color: var(--ogis-accent);
+}
+
+// Scrollspy: the section in view is painted in the primary green, not white.
+.site-nav a[aria-current] {
+  color: var(--ogis-accent);
+  font-weight: 700;
+}
+
+main {
+  max-width: var(--ogis-content-width);
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+// --- Section bands --------------------------------------------------------
+// Alternate section backgrounds to break a long page into readable bands,
+// the way the org site does. Put .ogis-band on a top-level section (add
+// .ogis-band--alt to flip the colour). The section spans the full parent
+// width so the colour bleeds edge to edge, while its direct children are
+// placed on the content-width column so text stays readable. A child that
+// should span the whole band gets grid-column: 1 / -1.
+//
+// A band bleeds to its parent's edges, so it needs a full-width parent:
+// add .ogis-bands to <main> to release the default content max-width, or
+// place bands as direct children of <body>.
+
+main.ogis-bands {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.ogis-band {
+  // Match the content column to the nav and footer: their max-width includes
+  // a 1rem inset, so the band's column is the token minus the 2rem gutter.
+  --ogis-band-column: min(100% - 2rem, calc(var(--ogis-content-width) - 2rem));
+  display: grid;
+  grid-template-columns:
+    minmax(1rem, 1fr)
+    var(--ogis-band-column)
+    minmax(1rem, 1fr);
+  padding-block: 2.5rem;
+  background: var(--ogis-bg);
+  color: var(--ogis-fg);
+}
+
+.ogis-band--alt {
+  background: var(--ogis-bg-alt);
+}
+
+.ogis-band > * {
+  grid-column: 2;
+}
+
+// Keep the band padding even: trim the outer margins of the first and last
+// children so the colour reaches the section edges cleanly.
+.ogis-band > :first-child {
+  margin-top: 0;
+}
+
+.ogis-band > :last-child {
+  margin-bottom: 0;
+}
+
+// --- Site footer ----------------------------------------------------------
+
+.site-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  max-width: var(--ogis-content-width);
+  margin: 30px auto 0;
+  padding: 20px 1rem 2rem;
+  border-top: 1px solid var(--ogis-border);
+  color: var(--ogis-footer-fg);
+  font-size: 14px;
+}
+
+.footer-left {
+  justify-self: start;
+}
+
+.footer-right {
+  justify-self: end;
+}
+
+.footer-middle {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: 0.6rem;
+  color: var(--ogis-footer-fg);
+}
+
+.site-footer a {
+  color: var(--ogis-footer-link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+// --- Responsive -----------------------------------------------------------
+
+@media (max-width: 640px) {
+  .site-footer {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .footer-left,
+  .footer-right {
+    justify-self: center;
+  }
+}

@@ -1,0 +1,508 @@
+// Docs components.
+//
+// Optional, class-driven pieces a consumer opts into: blockquotes, code
+// blocks and chips, striped tables, figures, alerts, the prev/next pager,
+// the CTA buttons, the theme switch and the background-map widget.
+
+// --- Blockquotes ----------------------------------------------------------
+// A quote should read as a quote: it steps up to a larger warm serif with a
+// hanging opening quote mark and an accent rule. The mark is decorative, so
+// the quote text itself keeps the body--fg AA pair.
+
+blockquote {
+  position: relative;
+  margin-inline: 0;
+  padding: 0.45rem 0 0.45rem 2.5rem;
+  border-left: 0.3rem solid var(--ogis-accent);
+  color: var(--ogis-fg);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 25px;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+blockquote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0.5rem;
+  top: -0.02em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: normal;
+  font-size: 2.5em;
+  line-height: 1;
+  color: var(--ogis-accent);
+}
+
+// Close the quote with a real closing mark. The leading word joiner (U+2060)
+// glues it to the last word, so it wraps with the text instead of orphaning
+// onto a line of its own when the quote runs onto multiple lines.
+blockquote::after,
+blockquote > p:last-child::after {
+  content: "\2060\201D";
+  color: var(--ogis-accent);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: normal;
+  font-size: 1.25em;
+}
+
+// When the quote wraps its text in a paragraph, the closing mark belongs
+// inside that paragraph, not after the block.
+blockquote:has(p)::after {
+  content: none;
+}
+
+blockquote > p:last-child {
+  margin-bottom: 0;
+}
+
+// Pico resets `p` to font-style: normal, which would otherwise strip the
+// italic from the quote body even though blockquote itself is italic.
+blockquote p {
+  font-style: italic;
+}
+
+// --- Code, pre and inline chips -------------------------------------------
+
+pre {
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0;
+  border: 1px solid var(--ogis-code-block-border);
+  background: var(--ogis-code-block-bg);
+  font-size: var(--ogis-code-size);
+}
+
+pre code,
+pre code.hljs {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: var(--ogis-code-size);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: transparent;
+}
+
+:not(pre) > code {
+  padding: 0.08em 0.35em;
+  border-radius: var(--ogis-radius);
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+// The one-click copy control sits inside the block, so it adds no height or
+// margin of its own. It is low-contrast at rest and intensifies on hover or
+// keyboard focus; the glyph swaps to a check for the brief confirmation.
+.code-copy {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: inline-flex;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--ogis-radius);
+  background: transparent;
+  color: var(--ogis-muted);
+  font-family: var(--ogis-font);
+  font-size: 0.8125rem;
+  line-height: 1;
+  opacity: 0.55;
+  cursor: pointer;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.code-copy:hover,
+.code-copy:focus-visible {
+  opacity: 1;
+  border-color: var(--ogis-border);
+  background: var(--ogis-code-block-bg);
+  color: var(--ogis-accent);
+}
+
+.code-copy.is-copied {
+  opacity: 1;
+  border-color: transparent;
+  color: var(--ogis-accent);
+}
+
+// --- Tables ---------------------------------------------------------------
+// Every table is striped by default. Cells stay transparent so the stripe
+// reads against whatever band surface the table sits on (page or alt); the
+// translucent overlay is theme-aware, so it works in both themes.
+
+.table-wrap {
+  max-width: 100%;
+  margin: 1rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap table {
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+}
+
+table td,
+table th {
+  background-color: transparent;
+}
+
+table thead th {
+  background-color: var(--ogis-table-head);
+}
+
+table tbody tr:nth-child(even) {
+  background-color: var(--ogis-table-stripe);
+}
+
+// The self-contained HTML logo is a layout <table>; exempt it from the zebra
+// striping so no translucent tile paints behind the mark.
+.site-brand table tbody tr,
+.site-footer table tbody tr,
+.logo-demo table tbody tr {
+  background-color: transparent;
+}
+
+// --- Figures --------------------------------------------------------------
+
+main figure {
+  margin: 1.5rem 0;
+}
+
+main figure img {
+  margin: 0;
+}
+
+main figcaption {
+  margin-top: 0.5rem;
+  color: var(--ogis-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+// Content images only. Leaflet maps are embedded widgets: their tile and
+// marker images carry a leaflet-* class and must keep the zero margin/border
+// Leaflet assumes, or the border shows as a seam at every tile edge.
+main img:not([class*="leaflet"]) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--ogis-code-block-border);
+  border-radius: var(--ogis-radius);
+}
+
+// Styleguide logo tiles hold square marks, not content images. The tile's own
+// aspect-ratio does the locking; this stops the content-image rule above from
+// adding its vertical margin (which inflates each tile into a portrait box,
+// because the tile height follows its content) or its border. Two classes
+// (0,2,1) outrank that rule's attribute selector (0,1,2), so the square lock
+// holds regardless of stylesheet order.
+.logo-row .logo-size > img {
+  display: block;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+// --- Alerts ---------------------------------------------------------------
+
+.alert {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 0.25rem solid var(--alert-accent);
+  border-radius: var(--ogis-radius);
+  background: var(--alert-bg);
+}
+
+.alert > p:last-child {
+  margin-bottom: 0;
+}
+
+.alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.35rem;
+  color: var(--alert-accent);
+  font-weight: 700;
+}
+
+.alert-title svg {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.alert-note {
+  --alert-accent: var(--ogis-note);
+  --alert-bg: var(--ogis-note-bg);
+}
+
+.alert-tip {
+  --alert-accent: var(--ogis-tip);
+  --alert-bg: var(--ogis-tip-bg);
+}
+
+.alert-important {
+  --alert-accent: var(--ogis-important);
+  --alert-bg: var(--ogis-important-bg);
+}
+
+.alert-warning {
+  --alert-accent: var(--ogis-warning);
+  --alert-bg: var(--ogis-warning-bg);
+}
+
+.alert-caution {
+  --alert-accent: var(--ogis-caution);
+  --alert-bg: var(--ogis-caution-bg);
+}
+
+// --- Prev / next pager ----------------------------------------------------
+
+.doc-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ogis-border);
+}
+
+.pager-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--ogis-border);
+  border-radius: var(--ogis-radius);
+  color: var(--pico-color);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.pager-link:hover {
+  border-color: var(--ogis-accent);
+  color: var(--ogis-accent);
+}
+
+.pager-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+// --- Quiet CTA ------------------------------------------------------------
+
+.cta {
+  display: inline-block;
+  margin: 0;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--ogis-radius);
+  background: var(--ogis-cta-bg);
+  color: var(--ogis-cta-fg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.cta:hover,
+.cta:focus {
+  background: var(--ogis-cta-hover-bg);
+  color: var(--ogis-cta-fg);
+}
+
+.cta-quiet {
+  background: transparent;
+  border: 1px solid var(--ogis-accent);
+  color: var(--ogis-accent);
+}
+
+.cta-quiet:hover,
+.cta-quiet:focus {
+  background: var(--ogis-accent-soft);
+  color: var(--ogis-accent);
+}
+
+// --- Theme switch ---------------------------------------------------------
+// A small segmented Auto / Light / Dark control. The active segment is the
+// one whose button carries aria-pressed="true". The ui module drives the
+// root element's data-theme attribute from the buttons; nothing is persisted.
+
+.theme-switch {
+  display: inline-flex;
+  width: fit-content;
+  justify-self: start;
+  margin: 0.5rem 0 1rem;
+  padding: 3px;
+  border: 1px solid var(--ogis-border);
+  border-radius: calc(var(--ogis-radius) + 3px);
+  background: var(--ogis-surface);
+}
+
+.theme-switch button {
+  flex: none;
+  width: auto;
+  margin: 0;
+  padding: 0.35rem 0.9rem;
+  border: 0;
+  border-radius: var(--ogis-radius);
+  background: transparent;
+  color: var(--ogis-muted);
+  font-family: var(--ogis-font);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.theme-switch button:hover {
+  color: var(--ogis-fg);
+}
+
+.theme-switch button[aria-pressed="true"] {
+  background: var(--ogis-accent-soft);
+  color: var(--ogis-accent);
+  font-weight: 700;
+}
+
+// --- Background map -------------------------------------------------------
+// An optional random map background: the hosted Waymark-JS v1 viewer renders a
+// random country at zoom 8 into every element carrying data-background-map.
+// The module injects the viewer's CSS, jQuery and bundle from the waymark-js
+// project at runtime, then adds the .background-map class plus its canvas; the
+// component fills whatever height the container has.
+//
+// The map is decorative and fixed: it is random, non-interactive and does not
+// react to scroll, drag, double-click, touch or the keyboard. Pointer events
+// pass through the whole component, so page scroll is never hijacked; the
+// OpenStreetMap attribution is the one exception and stays clickable.
+//
+// Black/white is automatic: tiles stay natural in light (plain OSM) and
+// invert to the org's dark look under prefers-color-scheme: dark. Add the
+// .background-map--invert modifier (or the attribute value "invert") to force
+// the always-dark look in any theme.
+//
+// Two treatments ship from the same component:
+// - on its own it is a band, at least 160px tall (see the demo).
+// - inside .site-header it fills the static header band behind the logo. The
+//   band is always dark, so that one carries the invert modifier.
+
+.background-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  overflow: hidden;
+  background: var(--ogis-bg-alt);
+  // Inert by design: no drag, scroll, pinch, double-click or keyboard zoom.
+  pointer-events: none;
+}
+
+// Scoped to beat the viewer's own .waymark-map-container { min-height: 400px }
+// default, which would otherwise stop the map filling a short header.
+.background-map .background-map__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+// Leaflet images are widget chrome, not content. Neutralise any host
+// content-image styling (border, margin, radius) that would otherwise
+// show as a 1px seam at every tile edge.
+.background-map img {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+// Hide every Leaflet control except the attribution (which is declared
+// after the blanket rule so it wins on equal specificity).
+.background-map .leaflet-control {
+  display: none;
+}
+
+.background-map .leaflet-control-attribution {
+  display: block;
+  padding: 0 0.4rem;
+  background: rgba(255, 255, 255, 0.82);
+  color: #2b3129;
+  font-family: var(--ogis-font);
+  font-size: 11px;
+  line-height: 1.7;
+  // The one interactive part of the component: re-enable pointer events so
+  // the attribution link can still be clicked through the inert map.
+  pointer-events: auto;
+}
+
+.background-map .leaflet-control-attribution a {
+  color: inherit;
+}
+
+// Auto black/white follows the effective theme: the OS while no data-theme
+// is set, then the forced scheme. Only .background-map--invert opts out of
+// inversion (for an always-dark band such as the header).
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])
+    .background-map:not(.background-map--invert)
+    .leaflet-map-pane {
+    filter: invert(100%);
+  }
+
+  :root:not([data-theme="light"])
+    .background-map:not(.background-map--invert)
+    .leaflet-control-attribution {
+    background: transparent;
+    color: #ffffff;
+  }
+}
+
+:root[data-theme="dark"]
+  .background-map:not(.background-map--invert)
+  .leaflet-map-pane {
+  filter: invert(100%);
+}
+
+:root[data-theme="dark"]
+  .background-map:not(.background-map--invert)
+  .leaflet-control-attribution {
+  background: transparent;
+  color: #ffffff;
+}
+
+.background-map--invert {
+  background: var(--ogis-header-bg);
+}
+
+.background-map--invert .leaflet-map-pane {
+  filter: invert(100%);
+}
+
+// Doubled class (0,3,0) so the always-dark look survives the Leaflet chip
+// rule, which the module loads afterwards.
+.background-map.background-map--invert .leaflet-control-attribution {
+  background: transparent;
+  color: #ffffff;
+}

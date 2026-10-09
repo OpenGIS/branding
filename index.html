@@ -1,0 +1,1491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>OpenGIS Styleguide</title>
+    <meta
+      name="description"
+      content="Styleguide, component demo and logo set for the OpenGIS theme — Pico CSS plus the OGIS tokens."
+    />
+    <link rel="canonical" href="%VITE_PRODUCTION_URL%" />
+    <link rel="icon" href="assets/img/logo-green.png" />
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      /* Styleguide-only scaffolding. None of this ships to consumers. */
+      .sg-note {
+        color: var(--ogis-muted);
+        font-size: 0.875rem;
+      }
+
+      .sg-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.5rem;
+      }
+
+      .sg-stack > * + * {
+        margin-top: 0.75rem;
+      }
+
+      .logo-row {
+        gap: 0.75rem;
+      }
+
+      .logo-size {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        padding: 0.5rem;
+        border: 1px solid var(--ogis-border);
+        border-radius: var(--ogis-radius);
+        background: var(--ogis-surface);
+      }
+
+      .logo-row-dark .logo-size {
+        background: var(--ogis-header-bg);
+        border-color: var(--ogis-header-border);
+      }
+
+      .logo-row-light .logo-size {
+        background: #ffffff;
+        border-color: #d8e6da;
+      }
+
+      .logo-24 img {
+        width: 24px;
+        height: 24px;
+      }
+      .logo-32 img {
+        width: 32px;
+        height: 32px;
+      }
+      .logo-40 img {
+        width: 40px;
+        height: 40px;
+      }
+      .logo-64 img {
+        width: 64px;
+        height: 64px;
+      }
+
+      .swatch-groups {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .swatch-group h3 {
+        margin-top: 0;
+      }
+
+      .swatch-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.5rem;
+      }
+
+      .swatch {
+        overflow: hidden;
+        border: 1px solid var(--ogis-border);
+        border-radius: var(--ogis-radius);
+        background: var(--ogis-surface);
+        font-size: 0.75rem;
+      }
+
+      .swatch-chip {
+        height: 48px;
+      }
+
+      .swatch-meta {
+        padding: 0.35rem 0.5rem;
+        line-height: 1.35;
+      }
+
+      .swatch-name {
+        display: block;
+        font-weight: 700;
+      }
+
+      .swatch-hex {
+        color: var(--ogis-muted);
+      }
+
+      .demo-surface {
+        padding: 1rem;
+        border: 1px solid var(--ogis-border);
+        border-radius: var(--ogis-radius);
+        background: var(--ogis-bg-alt);
+      }
+
+      .logo-demo {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem;
+        border-radius: var(--ogis-radius);
+      }
+
+      .logo-demo--light {
+        color: #000000;
+        background: #ffffff;
+      }
+
+      .logo-demo--dark {
+        color: #ffffff;
+        background: var(--ogis-header-bg);
+      }
+
+      .sg-form {
+        display: grid;
+        gap: 1rem;
+        max-width: 32rem;
+      }
+
+      .sg-form label {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div
+        class="background-map background-map--invert"
+        data-background-map="invert"
+        aria-hidden="true"
+      ></div>
+      <span class="site-brand">
+        <a
+          href="https://ogis.org/"
+          title="Open GIS"
+          aria-label="Open GIS"
+          style='
+            display: inline-block;
+            margin: 0;
+            font-family:
+              ui-monospace, "SFMono-Regular", "SF Mono",
+              Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 40px;
+            line-height: 1;
+            color: inherit;
+            text-decoration: none;
+            -webkit-user-select: none;
+            user-select: none;
+          '
+        >
+          <table
+            style="
+              border-collapse: collapse;
+              margin: 0;
+              border-spacing: 0;
+              font-size: 1em;
+              color: currentColor;
+              text-align: center;
+            "
+          >
+            <tr>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                  border-bottom: 1px solid currentColor;
+                  border-right: 1px solid currentColor;
+                "
+              >
+                <svg
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  focusable="false"
+                  style="
+                    display: block;
+                    width: 0.75em;
+                    height: 0.75em;
+                    margin: 0 auto;
+                  "
+                >
+                  <path
+                    fill="currentColor"
+                    d="M0 256a256 256 0 1 0 512 0a256 256 0 1 0 -512 0zM95 417 31 222 119 265 157 462ZM453 162 380 152 338 223 437 280 432 400 324 474 195 476 278 325 60 215 239 85 140 60 330 40 409 87 368 140 432 112Z"
+                  />
+                </svg>
+              </td>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                  border-bottom: 1px solid currentColor;
+                "
+              >
+                G
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                  border-right: 1px solid currentColor;
+                "
+              >
+                I
+              </td>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                "
+              >
+                S
+              </td>
+            </tr>
+          </table>
+        </a>
+      </span>
+    </header>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#quick-start">Quick Start</a>
+      <a href="#map-bg">Map BG</a>
+      <a href="#logo">Logo</a>
+      <a href="#palette">Palette</a>
+      <a href="#dark-light">Dark vs Light</a>
+      <a href="#typography">Typography</a>
+      <a href="#forms">Forms</a>
+      <a href="#code">Code</a>
+      <a href="#dependencies">Dependencies</a>
+    </nav>
+
+    <main id="top" class="ogis-bands">
+      <section class="ogis-band">
+        <h1>OpenGIS Styleguide</h1>
+        <p>
+          The single source for OpenGIS docs and site styling. One hosted
+          stylesheet — <code>assets/css/ogis.css</code> — bundles
+          <a href="https://picocss.com/">Pico CSS</a>, the OpenGIS theme and the
+          highlight.js syntax palette, so consumers link it and, for highlighted
+          code, add the highlight.js runtime. It also ships the OGIS logo set, a
+          small page UI and an optional background map. A change here updates
+          every site that links it.
+        </p>
+        <p class="sg-note">
+          Every section below is both the documentation and the live demo.
+        </p>
+      </section>
+
+      <section class="ogis-band ogis-band--alt" id="quick-start">
+        <h2>Quick Start</h2>
+        <p>
+          Link the one hosted stylesheet — it already carries Pico CSS, the
+          OpenGIS theme and the syntax palette. Add highlight.js only if you
+          want highlighted code blocks. The default is to load directly from the
+          ogis.org domain; forking or self-hosting takes one env value
+          (<code>VITE_PRODUCTION_URL</code>), which drives the canonical link
+          and these examples.
+        </p>
+        <pre><code class="language-html">&lt;link rel="stylesheet" href="%VITE_PRODUCTION_URL%/assets/css/ogis.css"&gt;
+&lt;link rel="icon" href="%VITE_PRODUCTION_URL%/assets/img/logo-green.png"&gt;
+&lt;!-- Optional: highlight code blocks --&gt;
+&lt;script src="/your/highlight.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;hljs.highlightAll();&lt;/script&gt;</code></pre>
+        <p>The hosted assets, by type:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Asset</th>
+                <th>Type</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ogis.css</code></td>
+                <td>CSS</td>
+                <td>Pico CSS, OpenGIS theme, components and syntax palette</td>
+              </tr>
+              <tr>
+                <td><code>background-map.js</code></td>
+                <td>JS</td>
+                <td>Optional random-country map module</td>
+              </tr>
+              <tr>
+                <td><code>logo.html</code></td>
+                <td>HTML</td>
+                <td>Self-contained default logo snippet</td>
+              </tr>
+              <tr>
+                <td><code>logo-white.svg</code></td>
+                <td>SVG</td>
+                <td>White mark for dark surfaces</td>
+              </tr>
+              <tr>
+                <td><code>logo-black.svg</code></td>
+                <td>SVG</td>
+                <td>Black mark for light surfaces</td>
+              </tr>
+              <tr>
+                <td><code>logo-green.png</code></td>
+                <td>PNG</td>
+                <td>Green tile for favicons and raster use</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Docs page</h3>
+        <p class="sg-note">
+          A docs page reuses the header and section nav above, then closes with
+          a prev/next pager:
+        </p>
+        <nav class="doc-pager" aria-label="Document navigation">
+          <a class="pager-link pager-prev" href="#quick-start"
+            ><span class="pager-arrow" aria-hidden="true">&larr;</span
+            ><span>Quick Start</span></a
+          >
+          <a
+            class="pager-link pager-next"
+            href="https://github.com/OpenGIS/branding"
+            ><span>View Source</span
+            ><span class="pager-arrow" aria-hidden="true">&rarr;</span></a
+          >
+        </nav>
+      </section>
+
+      <section class="ogis-band" id="map-bg">
+        <h2>Map BG</h2>
+        <p>
+          One optional module gives any element a random country background,
+          powered by the hosted
+          <a href="https://github.com/OpenGIS/Waymark-JS">Waymark-JS</a> v1
+          viewer. Mark a container with <code>data-background-map</code> and
+          load the module once; it injects the viewer's CSS, jQuery and bundle
+          (see <a href="#dependencies">Dependencies</a>) and centres a country
+          at zoom&nbsp;8. The map is decorative and fixed: random and
+          non-interactive, with no scroll, drag, pinch, double-click or keyboard
+          zoom.
+        </p>
+        <div
+          class="background-map"
+          data-background-map
+          style="height: 220px"
+        ></div>
+        <p class="sg-note">
+          Live demo — the container above carries only the attribute and a
+          height. Reload the page for a different country. This page's header
+          wears the same module with <code>data-background-map="invert"</code>,
+          since the header band is always dark.
+        </p>
+        <pre><code class="language-html">&lt;!-- Any block; set its height however you like. --&gt;
+&lt;div data-background-map style="height: 220px"&gt;&lt;/div&gt;
+
+&lt;script src="%VITE_PRODUCTION_URL%/assets/js/background-map.js" defer&gt;&lt;/script&gt;</code></pre>
+        <p>
+          The built file exposes <code>window.BackgroundMap.init()</code> and
+          <code>window.BackgroundMap.refresh()</code> for containers added after
+          load. Force the always-dark look on a dark band with the
+          <code>invert</code> modifier:
+        </p>
+        <pre><code class="language-html">&lt;div data-background-map="invert"&gt;&lt;/div&gt;
+&lt;!-- or --&gt;
+&lt;div class="background-map--invert" data-background-map&gt;&lt;/div&gt;</code></pre>
+      </section>
+
+      <section class="ogis-band ogis-band--alt" id="logo">
+        <h2>Logo</h2>
+        <p>
+          The mark is the 2&times;2 OGIS grid — globe, G, I, S — with a thin
+          cross grid. The default is the self-contained HTML logo below; three
+          file assets cover <code>&lt;img&gt;</code>, raster and favicon
+          contexts.
+        </p>
+
+        <h3 style="margin-top: 2rem">HTML logo (default)</h3>
+        <p class="sg-note">
+          One copy-pasteable snippet: inline CSS only, no stylesheet and no
+          external requests. It is both the mark and the link to
+          <a href="https://ogis.org/">ogis.org</a>. Monochrome via
+          <code>currentColor</code>, so set <code>color</code> on the wrapper to
+          flip black/white; square with a transparent background. Everything is
+          em-based at a default <code>font-size:40px</code> — change it to
+          scale.
+        </p>
+        <div class="sg-row logo-row" style="margin-top: 1rem">
+          <span class="logo-demo logo-demo--light"
+            ><a
+              href="https://ogis.org/"
+              title="Open GIS"
+              aria-label="Open GIS"
+              style='
+                display: inline-block;
+                margin: 0;
+                font-family:
+                  ui-monospace, "SFMono-Regular", "SF Mono",
+                  Menlo, Consolas, "Liberation Mono", monospace;
+                font-size: 40px;
+                line-height: 1;
+                color: inherit;
+                text-decoration: none;
+                -webkit-user-select: none;
+                user-select: none;
+              '
+            >
+              <table
+                style="
+                  border-collapse: collapse;
+                  margin: 0;
+                  border-spacing: 0;
+                  font-size: 1em;
+                  color: currentColor;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-bottom: 1px solid currentColor;
+                      border-right: 1px solid currentColor;
+                    "
+                  >
+                    <svg
+                      viewBox="0 0 512 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      focusable="false"
+                      style="
+                        display: block;
+                        width: 0.75em;
+                        height: 0.75em;
+                        margin: 0 auto;
+                      "
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M0 256a256 256 0 1 0 512 0a256 256 0 1 0 -512 0zM95 417 31 222 119 265 157 462ZM453 162 380 152 338 223 437 280 432 400 324 474 195 476 278 325 60 215 239 85 140 60 330 40 409 87 368 140 432 112Z"
+                      />
+                    </svg>
+                  </td>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-bottom: 1px solid currentColor;
+                    "
+                  >
+                    G
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-right: 1px solid currentColor;
+                    "
+                  >
+                    I
+                  </td>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                    "
+                  >
+                    S
+                  </td>
+                </tr>
+              </table>
+            </a></span
+          >
+          <span class="logo-demo logo-demo--light"
+            ><a
+              href="https://ogis.org/"
+              title="Open GIS"
+              aria-label="Open GIS"
+              style='
+                display: inline-block;
+                margin: 0;
+                font-family:
+                  ui-monospace, "SFMono-Regular", "SF Mono",
+                  Menlo, Consolas, "Liberation Mono", monospace;
+                font-size: 24px;
+                line-height: 1;
+                color: inherit;
+                text-decoration: none;
+                -webkit-user-select: none;
+                user-select: none;
+              '
+            >
+              <table
+                style="
+                  border-collapse: collapse;
+                  margin: 0;
+                  border-spacing: 0;
+                  font-size: 1em;
+                  color: currentColor;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-bottom: 1px solid currentColor;
+                      border-right: 1px solid currentColor;
+                    "
+                  >
+                    <svg
+                      viewBox="0 0 512 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      focusable="false"
+                      style="
+                        display: block;
+                        width: 0.75em;
+                        height: 0.75em;
+                        margin: 0 auto;
+                      "
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M0 256a256 256 0 1 0 512 0a256 256 0 1 0 -512 0zM95 417 31 222 119 265 157 462ZM453 162 380 152 338 223 437 280 432 400 324 474 195 476 278 325 60 215 239 85 140 60 330 40 409 87 368 140 432 112Z"
+                      />
+                    </svg>
+                  </td>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-bottom: 1px solid currentColor;
+                    "
+                  >
+                    G
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-right: 1px solid currentColor;
+                    "
+                  >
+                    I
+                  </td>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                    "
+                  >
+                    S
+                  </td>
+                </tr>
+              </table>
+            </a></span
+          >
+          <span class="logo-demo logo-demo--dark"
+            ><a
+              href="https://ogis.org/"
+              title="Open GIS"
+              aria-label="Open GIS"
+              style='
+                display: inline-block;
+                margin: 0;
+                font-family:
+                  ui-monospace, "SFMono-Regular", "SF Mono",
+                  Menlo, Consolas, "Liberation Mono", monospace;
+                font-size: 40px;
+                line-height: 1;
+                color: inherit;
+                text-decoration: none;
+                -webkit-user-select: none;
+                user-select: none;
+              '
+            >
+              <table
+                style="
+                  border-collapse: collapse;
+                  margin: 0;
+                  border-spacing: 0;
+                  font-size: 1em;
+                  color: currentColor;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-bottom: 1px solid currentColor;
+                      border-right: 1px solid currentColor;
+                    "
+                  >
+                    <svg
+                      viewBox="0 0 512 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      focusable="false"
+                      style="
+                        display: block;
+                        width: 0.75em;
+                        height: 0.75em;
+                        margin: 0 auto;
+                      "
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M0 256a256 256 0 1 0 512 0a256 256 0 1 0 -512 0zM95 417 31 222 119 265 157 462ZM453 162 380 152 338 223 437 280 432 400 324 474 195 476 278 325 60 215 239 85 140 60 330 40 409 87 368 140 432 112Z"
+                      />
+                    </svg>
+                  </td>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-bottom: 1px solid currentColor;
+                    "
+                  >
+                    G
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                      border-right: 1px solid currentColor;
+                    "
+                  >
+                    I
+                  </td>
+                  <td
+                    style="
+                      box-sizing: content-box;
+                      width: 1.15em;
+                      height: 1.15em;
+                      padding: 0;
+                      text-align: center;
+                      vertical-align: middle;
+                      font: inherit;
+                      line-height: 1.15em;
+                      color: inherit;
+                      border: 0;
+                    "
+                  >
+                    S
+                  </td>
+                </tr>
+              </table>
+            </a></span
+          >
+        </div>
+        <pre style="margin-top: 1rem"><code class="hljs language-html">&lt;a
+  href="https://ogis.org/"
+  title="Open GIS"
+  aria-label="Open GIS"
+  style='
+    display: inline-block;
+    margin: 0;
+    font-family:
+      ui-monospace, "SFMono-Regular", "SF Mono", Menlo,
+      Consolas, "Liberation Mono", monospace;
+    font-size: 40px;
+    line-height: 1;
+    color: inherit;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+  '
+&gt;
+  &lt;table
+    style="
+      border-collapse: collapse;
+      margin: 0;
+      border-spacing: 0;
+      font-size: 1em;
+      color: currentColor;
+      text-align: center;
+    "
+  &gt;
+    &lt;tr&gt;
+      &lt;td
+        style="
+          box-sizing: content-box;
+          width: 1.15em;
+          height: 1.15em;
+          padding: 0;
+          text-align: center;
+          vertical-align: middle;
+          font: inherit;
+          line-height: 1.15em;
+          color: inherit;
+          border: 0;
+          border-bottom: 1px solid currentColor;
+          border-right: 1px solid currentColor;
+        "
+      &gt;
+        &lt;svg
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false"
+          style="display: block; width: 0.75em; height: 0.75em; margin: 0 auto"
+        &gt;
+          &lt;path
+            fill="currentColor"
+            d="M0 256a256 256 0 1 0 512 0a256 256 0 1 0 -512 0zM95 417 31 222 119 265 157 462ZM453 162 380 152 338 223 437 280 432 400 324 474 195 476 278 325 60 215 239 85 140 60 330 40 409 87 368 140 432 112Z"
+          /&gt;
+        &lt;/svg&gt;
+      &lt;/td&gt;
+      &lt;td
+        style="
+          box-sizing: content-box;
+          width: 1.15em;
+          height: 1.15em;
+          padding: 0;
+          text-align: center;
+          vertical-align: middle;
+          font: inherit;
+          line-height: 1.15em;
+          color: inherit;
+          border: 0;
+          border-bottom: 1px solid currentColor;
+        "
+      &gt;
+        G
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td
+        style="
+          box-sizing: content-box;
+          width: 1.15em;
+          height: 1.15em;
+          padding: 0;
+          text-align: center;
+          vertical-align: middle;
+          font: inherit;
+          line-height: 1.15em;
+          color: inherit;
+          border: 0;
+          border-right: 1px solid currentColor;
+        "
+      &gt;
+        I
+      &lt;/td&gt;
+      &lt;td
+        style="
+          box-sizing: content-box;
+          width: 1.15em;
+          height: 1.15em;
+          padding: 0;
+          text-align: center;
+          vertical-align: middle;
+          font: inherit;
+          line-height: 1.15em;
+          color: inherit;
+          border: 0;
+        "
+      &gt;
+        S
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/a&gt;
+</code></pre>
+
+        <h3 style="margin-top: 2rem">logo-white.svg</h3>
+        <p class="sg-note">
+          White mark for dark surfaces. Reference it as an
+          <code>&lt;img&gt;</code> over the near-black header band.
+        </p>
+        <div class="sg-row logo-row logo-row-dark">
+          <span class="logo-size logo-24"
+            ><img src="assets/img/logo-white.svg" alt="" width="24" height="24"
+          /></span>
+          <span class="logo-size logo-32"
+            ><img src="assets/img/logo-white.svg" alt="" width="32" height="32"
+          /></span>
+          <span class="logo-size logo-40"
+            ><img src="assets/img/logo-white.svg" alt="" width="40" height="40"
+          /></span>
+        </div>
+
+        <h3 style="margin-top: 2rem">logo-black.svg</h3>
+        <p class="sg-note">
+          Black mark for light surfaces. Reference it as an
+          <code>&lt;img&gt;</code> on light backgrounds.
+        </p>
+        <div class="sg-row logo-row logo-row-light">
+          <span class="logo-size logo-24"
+            ><img src="assets/img/logo-black.svg" alt="" width="24" height="24"
+          /></span>
+          <span class="logo-size logo-32"
+            ><img src="assets/img/logo-black.svg" alt="" width="32" height="32"
+          /></span>
+          <span class="logo-size logo-40"
+            ><img src="assets/img/logo-black.svg" alt="" width="40" height="40"
+          /></span>
+        </div>
+
+        <h3 style="margin-top: 2rem">logo-green.png</h3>
+        <p class="sg-note">
+          Green tile for favicons and raster contexts such as app icons and
+          social cards. A 512&times;512 PNG; link it as the page icon.
+        </p>
+        <div class="sg-row logo-row">
+          <span class="logo-size logo-24"
+            ><img
+              src="assets/img/logo-green.png"
+              alt="OpenGIS app icon"
+              width="24"
+              height="24"
+          /></span>
+          <span class="logo-size logo-32"
+            ><img
+              src="assets/img/logo-green.png"
+              alt="OpenGIS app icon"
+              width="32"
+              height="32"
+          /></span>
+          <span class="logo-size logo-40"
+            ><img
+              src="assets/img/logo-green.png"
+              alt="OpenGIS app icon"
+              width="40"
+              height="40"
+          /></span>
+          <span class="logo-size logo-64"
+            ><img
+              src="assets/img/logo-green.png"
+              alt="OpenGIS app icon"
+              width="64"
+              height="64"
+          /></span>
+          <span class="sg-note"
+            >Link it with
+            <code
+              >&lt;link rel="icon"
+              href="%VITE_PRODUCTION_URL%/assets/img/logo-green.png"&gt;</code
+            >.</span
+          >
+        </div>
+      </section>
+
+      <section class="ogis-band" id="palette">
+        <h2>Palette</h2>
+        <p class="sg-note">
+          Both palettes are shown together so they are visible in either mode.
+          Dark deepens the org surfaces to <code>#000b00</code> /
+          <code>#001800</code> with the neon accent <code>#0dd70d</code>; light
+          warms the page to <code>#fcfaf5</code> with sage bands and an
+          AA-compliant darker green for links. Orange (<code>#b3571f</code> /
+          <code>#dc8f4e</code>) is a first-class accent beside the green.
+        </p>
+        <div class="swatch-groups">
+          <div class="swatch-group">
+            <h3>Light</h3>
+            <div class="swatch-grid" id="swatch-light"></div>
+          </div>
+          <div class="swatch-group">
+            <h3>Dark</h3>
+            <div class="swatch-grid" id="swatch-dark"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ogis-band ogis-band--alt" id="dark-light">
+        <h2>Dark vs Light</h2>
+        <p>
+          The theme ships a light and a dark token set. With nothing set it
+          follows your operating system through
+          <code>prefers-color-scheme</code>. A page can force a scheme by
+          setting <code>data-theme="light"</code> or
+          <code>data-theme="dark"</code> on the root element; removing the
+          attribute returns to the OS default. The control below demonstrates it
+          live — the whole page switches, and nothing is stored.
+        </p>
+        <div
+          class="theme-switch"
+          role="group"
+          aria-label="Colour scheme"
+          data-theme-switch
+        >
+          <button type="button" data-theme-choice="auto" aria-pressed="true">
+            Auto
+          </button>
+          <button type="button" data-theme-choice="light" aria-pressed="false">
+            Light
+          </button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">
+            Dark
+          </button>
+        </div>
+        <pre><code class="language-html">&lt;!-- Force a scheme; omit the attribute to follow the OS. --&gt;
+&lt;html data-theme="dark"&gt;</code></pre>
+        <p class="sg-note">
+          Light warms the page to <code>#fcfaf5</code> with sage
+          <code>#f0f1e6</code> bands and an AA-compliant green for links
+          (<code>#0a7d0a</code>). Dark deepens the org surfaces to
+          <code>#000b00</code> / <code>#001800</code> with the neon accent
+          <code>#0dd70d</code>. Orange (<code>#b3571f</code> /
+          <code>#dc8f4e</code>) is a first-class accent in both. Add
+          <code>&lt;meta name="color-scheme" content="light dark"&gt;</code> so
+          the browser agrees with the theme about which scheme is available.
+        </p>
+      </section>
+
+      <section class="ogis-band" id="typography">
+        <h2>Typography</h2>
+        <p class="sg-note">
+          Full monospace throughout at 15&nbsp;px/1.65; code at 13&nbsp;px.
+          Blockquotes step up to a larger warm serif (25&nbsp;px) with a hanging
+          opening quote mark, a closing mark and an accent rule. No webfonts, so
+          there are zero font requests.
+        </p>
+        <h1>Heading one</h1>
+        <h2>Heading two</h2>
+        <h3>Heading three</h3>
+        <h4>Heading four</h4>
+        <h5>Heading five</h5>
+        <h6>Heading six</h6>
+        <p>
+          Body copy set in a calm monospace measure. Inline
+          <code>code chips</code> sit on a soft panel,
+          <strong>strong</strong> and <em>emphasis</em> carry the usual weight
+          shifts, and <a href="#typography">links</a> use the theme accent with
+          a quiet underline.
+        </p>
+        <ul>
+          <li>Unordered list item</li>
+          <li>Second item with <code>inline code</code></li>
+        </ul>
+        <ol>
+          <li>Ordered list item</li>
+          <li>Second item</li>
+        </ol>
+        <blockquote>
+          <p>
+            Open source means freedom of choice, collaboration and innovation.
+          </p>
+        </blockquote>
+        <p class="sg-note">
+          Links, buttons and form controls take the theme accent with a
+          <code>2px solid var(--ogis-accent)</code> focus ring at a 2&nbsp;px
+          offset — <a href="#typography">tab to this link</a> to see it.
+        </p>
+        <hr />
+
+        <h3 id="alerts">Alerts</h3>
+        <p class="sg-note">
+          Five types share one grey surface and keep their colour coding in the
+          accent — border, icon and label.
+        </p>
+        <div class="alert alert-note">
+          <p class="alert-title">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+              /></svg
+            >Note
+          </p>
+          <p>
+            Useful information that readers should know, even when skimming.
+          </p>
+        </div>
+        <div class="alert alert-tip">
+          <p class="alert-title">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
+              /></svg
+            >Tip
+          </p>
+          <p>Optional information that helps readers succeed.</p>
+        </div>
+        <div class="alert alert-important">
+          <p class="alert-title">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              /></svg
+            >Important
+          </p>
+          <p>Key information readers need to reach their goal.</p>
+        </div>
+        <div class="alert alert-warning">
+          <p class="alert-title">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              /></svg
+            >Warning
+          </p>
+          <p>Urgent information that needs immediate attention.</p>
+        </div>
+        <div class="alert alert-caution">
+          <p class="alert-title">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+              /></svg
+            >Caution
+          </p>
+          <p>Advise about the consequences of certain actions.</p>
+        </div>
+      </section>
+
+      <section class="ogis-band ogis-band--alt" id="forms">
+        <h2>Forms</h2>
+        <p class="sg-note">
+          Pico's form basics inherit the theme tokens: surfaces, borders and the
+          neon focus ring.
+        </p>
+        <form class="sg-form" onsubmit="return false;">
+          <label for="sg-name">
+            Name
+            <input
+              id="sg-name"
+              name="name"
+              type="text"
+              autocomplete="off"
+              placeholder="Ada Lovelace"
+            />
+          </label>
+          <label for="sg-about">
+            About
+            <textarea id="sg-about" name="about" rows="2">
+A themed Pico form control.</textarea>
+          </label>
+          <label for="sg-layer">
+            Layer
+            <select id="sg-layer" name="layer">
+              <option>Terrain</option>
+              <option>Contours</option>
+              <option>Satellite</option>
+            </select>
+          </label>
+          <label for="sg-tiles">
+            <input id="sg-tiles" type="checkbox" name="tiles" checked />
+            Enable tiles
+          </label>
+          <div>
+            <button type="submit">Save</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+        </form>
+        <h3>Buttons and calls to action</h3>
+        <div class="sg-row">
+          <a class="cta" href="#forms">Primary CTA</a>
+          <a class="cta cta-quiet" href="#forms">Quiet CTA</a>
+          <button type="button">Button</button>
+          <button type="button" class="secondary">Secondary</button>
+        </div>
+      </section>
+
+      <section class="ogis-band" id="code">
+        <h2>Code</h2>
+        <p>
+          The syntax palette lives in <code>ogis.css</code> alongside the rest
+          of the theme, keyed on highlight.js language classes. The styleguide
+          loads highlight.js&nbsp;11.12.0 from npm; give a block a
+          <code>language-*</code> class and it highlights on load. Every block
+          has a one-click copy control in the top-right; long lines wrap, so
+          nothing scrolls sideways.
+        </p>
+        <p>
+          Inline code is a plain chip by default —
+          <code>map.on("ready")</code> — but a chip carrying
+          <code>language-*</code> highlights:
+          <code class="language-javascript">map.on("ready")</code>.
+        </p>
+        <pre><code class="language-javascript">// Tile a Waymark map
+import { Map } from "waymark-js";
+
+const map = new Map("map", { style: "terrain" });
+map.on("ready", () =&gt; {
+  console.log("tiles loaded");
+});</code></pre>
+        <pre><code class="language-shell"># Fetch the tile catalogue
+curl -s https://tile.ogis.org/sources | jq .
+
+# Health check
+curl -s https://tile.ogis.org/health</code></pre>
+      </section>
+
+      <section class="ogis-band ogis-band--alt" id="dependencies">
+        <h2>Dependencies</h2>
+        <p>The theme and its exports build on these third-party projects.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Dependency</th>
+                <th>Version</th>
+                <th>How it is used</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="https://picocss.com/">Pico CSS</a></td>
+                <td>2.1.1</td>
+                <td>Bundled into <code>ogis.css</code> (npm).</td>
+              </tr>
+              <tr>
+                <td><a href="https://highlightjs.org/">highlight.js</a></td>
+                <td>11.12.0</td>
+                <td>
+                  Runtime added by the consumer; the syntax palette ships in
+                  <code>ogis.css</code>.
+                </td>
+              </tr>
+              <tr>
+                <td><a href="https://jquery.com/">jQuery</a></td>
+                <td>3.7.1</td>
+                <td>
+                  Fetched at runtime by the <code>background-map</code> export
+                  only.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://github.com/OpenGIS/Waymark-JS">Waymark-JS</a>
+                </td>
+                <td>v1</td>
+                <td>
+                  Fetched at runtime by the <code>background-map</code> export
+                  only.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-left">
+        <a href="https://www.ogis.org/">ogis.org</a>
+      </div>
+      <div class="footer-middle">
+        <a
+          href="https://ogis.org/"
+          title="Open GIS"
+          aria-label="Open GIS"
+          style='
+            display: inline-block;
+            margin: 0;
+            font-family:
+              ui-monospace, "SFMono-Regular", "SF Mono",
+              Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 16px;
+            line-height: 1;
+            color: inherit;
+            text-decoration: none;
+            -webkit-user-select: none;
+            user-select: none;
+          '
+        >
+          <table
+            style="
+              border-collapse: collapse;
+              margin: 0;
+              border-spacing: 0;
+              font-size: 1em;
+              color: currentColor;
+              text-align: center;
+            "
+          >
+            <tr>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                  border-bottom: 1px solid currentColor;
+                  border-right: 1px solid currentColor;
+                "
+              >
+                <svg
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  focusable="false"
+                  style="
+                    display: block;
+                    width: 0.75em;
+                    height: 0.75em;
+                    margin: 0 auto;
+                  "
+                >
+                  <path
+                    fill="currentColor"
+                    d="M0 256a256 256 0 1 0 512 0a256 256 0 1 0 -512 0zM95 417 31 222 119 265 157 462ZM453 162 380 152 338 223 437 280 432 400 324 474 195 476 278 325 60 215 239 85 140 60 330 40 409 87 368 140 432 112Z"
+                  />
+                </svg>
+              </td>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                  border-bottom: 1px solid currentColor;
+                "
+              >
+                G
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                  border-right: 1px solid currentColor;
+                "
+              >
+                I
+              </td>
+              <td
+                style="
+                  box-sizing: content-box;
+                  width: 1.15em;
+                  height: 1.15em;
+                  padding: 0;
+                  text-align: center;
+                  vertical-align: middle;
+                  font: inherit;
+                  line-height: 1.15em;
+                  color: inherit;
+                  border: 0;
+                "
+              >
+                S
+              </td>
+            </tr>
+          </table>
+        </a>
+      </div>
+      <div class="footer-right">
+        <a
+          href="https://github.com/OpenGIS/branding"
+          rel="noopener"
+          aria-label="OpenGIS/branding on GitHub"
+          style="display: inline-flex; align-items: center"
+        >
+          <svg
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+            style="display: block; width: 18px; height: 18px"
+          >
+            <path
+              fill="currentColor"
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+        </a>
+      </div>
+    </footer>
+
+    <script>
+            var SWATCHES = {
+        light: [
+          ["bg", "#fcfaf5"],
+          ["bg-alt", "#f0f1e6"],
+          ["surface", "#fffefb"],
+          ["fg", "#2b3129"],
+          ["heading", "#18281a"],
+          ["muted", "#61685b"],
+          ["border", "#dddccd"],
+          ["accent", "#0a7d0a"],
+          ["orange", "#b3571f"],
+          ["code-block", "#e7e4d6"],
+        ],
+        dark: [
+          ["bg", "#000b00"],
+          ["bg-alt", "#001800"],
+          ["surface", "#001300"],
+          ["fg", "#eeeeee"],
+          ["heading", "#e8f5ea"],
+          ["muted", "#9bb0a3"],
+          ["border", "#0e3111"],
+          ["accent", "#0dd70d"],
+          ["orange", "#dc8f4e"],
+          ["code-block", "#1a1a1a"],
+        ],
+      };
+      for (var group in SWATCHES) {
+        var host = document.getElementById("swatch-" + group);
+        SWATCHES[group].forEach(function (item) {
+          var cell = document.createElement("div");
+          cell.className = "swatch";
+          var chip = document.createElement("div");
+          chip.className = "swatch-chip";
+          chip.style.background = item[1];
+          var meta = document.createElement("div");
+          meta.className = "swatch-meta";
+          var name = document.createElement("span");
+          name.className = "swatch-name";
+          name.textContent = item[0];
+          var hex = document.createElement("span");
+          hex.className = "swatch-hex";
+          hex.textContent = item[1];
+          meta.appendChild(name);
+          meta.appendChild(hex);
+          cell.appendChild(chip);
+          cell.appendChild(meta);
+          host.appendChild(cell);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+// highlight.js syntax palette.
+//
+// Everything in this file is driven by the class names highlight.js emits,
+// so the highlight.js relationship is obvious here. Complete light palette
+// (green family) as the default; a complete a11y-dark-derived palette
+// overrides it on the dark code surface.
+//
+// Both palettes resolve on the same three selectors as the design tokens in
+// _tokens.scss, so the syntax colours and the token-driven surfaces always
+// agree:
+//
+//   :root:not([data-theme="dark"])              light (default / forced light)
+//   @media (prefers-color-scheme: dark)
+//     :root:not([data-theme])                   OS dark while Auto
+//   :root[data-theme="dark"]                    forced dark
+//
+// Without that scoping a bare prefers-color-scheme block would paint the dark
+// palette on the light surface whenever the OS is dark but a page forces
+// data-theme="light". Each palette defines every class group, so no token
+// inherits across the light/dark boundary.
+
+.hljs {
+  color: var(--ogis-code-color, #34423a);
+  background: var(--ogis-code-block-bg, #e7e4d6);
+}
+
+// Inline code keeps the theme chip. When a consumer highlights an inline
+// `<code class="language-...">` with highlightElement(), the element gains
+// the `.hljs` class; keep the chip surface rather than the full code-block
+// one.
+:not(pre) > code.hljs {
+  background: var(--ogis-code-bg, #edece5);
+}
+
+@mixin ogis-light-hljs {
+  .hljs-doctag,
+  .hljs-keyword,
+  .hljs-meta .hljs-keyword,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-variable.language_,
+  .hljs-selector-tag {
+    color: #15702f;
+  }
+
+  .hljs-title,
+  .hljs-title.class_,
+  .hljs-title.class_.inherited__ {
+    color: #0f6f5a;
+  }
+
+  .hljs-title.function_,
+  .hljs-function {
+    color: #0f6f5a;
+  }
+
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-property,
+  .hljs-params,
+  .hljs-selector-attr,
+  .hljs-selector-class,
+  .hljs-selector-id {
+    color: #2f5a3d;
+  }
+
+  .hljs-variable {
+    color: #2f5a3d;
+  }
+
+  .hljs-literal,
+  .hljs-meta,
+  .hljs-number,
+  .hljs-operator {
+    color: #8a5a00;
+  }
+
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-meta .hljs-string {
+    color: #166b2e;
+  }
+
+  .hljs-built_in {
+    color: #8a5a00;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #8a5a00;
+  }
+
+  .hljs-name,
+  .hljs-tag {
+    color: #0f6f5a;
+  }
+
+  .hljs-selector-pseudo {
+    color: #0f6f5a;
+  }
+
+  .hljs-comment,
+  .hljs-code,
+  .hljs-formula,
+  .hljs-quote {
+    color: #526357;
+    font-style: italic;
+  }
+
+  .hljs-section {
+    color: #0f6f5a;
+    font-weight: 700;
+  }
+
+  .hljs-subst,
+  .hljs-emphasis,
+  .hljs-strong {
+    color: var(--ogis-code-color, #34423a);
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: 700;
+  }
+
+  .hljs-addition {
+    color: #166b2e;
+    background-color: rgba(22, 107, 46, 0.08);
+  }
+
+  .hljs-deletion {
+    color: #a3262f;
+    background-color: rgba(163, 38, 47, 0.07);
+  }
+}
+
+@mixin ogis-dark-hljs {
+  .hljs-doctag,
+  .hljs-keyword,
+  .hljs-meta .hljs-keyword,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-variable.language_,
+  .hljs-selector-tag {
+    color: #dcc6e0;
+  }
+
+  .hljs-title,
+  .hljs-title.class_,
+  .hljs-title.class_.inherited__ {
+    color: #00e0e0;
+  }
+
+  .hljs-title.function_,
+  .hljs-function {
+    color: #5fe6dd;
+  }
+
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-property,
+  .hljs-params,
+  .hljs-selector-attr,
+  .hljs-selector-class,
+  .hljs-selector-id {
+    color: #f0efe4;
+  }
+
+  .hljs-variable {
+    color: #ffa07a;
+  }
+
+  .hljs-literal,
+  .hljs-meta,
+  .hljs-number,
+  .hljs-operator {
+    color: #f5ab35;
+  }
+
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-meta .hljs-string {
+    color: #abe338;
+  }
+
+  .hljs-built_in {
+    color: #f5ab35;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #abe338;
+  }
+
+  .hljs-name,
+  .hljs-tag {
+    color: #ffa07a;
+  }
+
+  .hljs-selector-pseudo {
+    color: #5fe6dd;
+  }
+
+  .hljs-comment,
+  .hljs-code,
+  .hljs-formula,
+  .hljs-quote {
+    color: #c2bfa2;
+    font-style: italic;
+  }
+
+  .hljs-section {
+    color: #00e0e0;
+    font-weight: 700;
+  }
+
+  .hljs-subst,
+  .hljs-emphasis,
+  .hljs-strong {
+    color: var(--ogis-code-color, #cbd8cd);
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: 700;
+  }
+
+  .hljs-addition {
+    color: #abe338;
+    background-color: rgba(171, 227, 56, 0.12);
+  }
+
+  .hljs-deletion {
+    color: #ffa07a;
+    background-color: rgba(255, 160, 122, 0.12);
+  }
+}
+
+:root:not([data-theme="dark"]) {
+  @include ogis-light-hljs;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include ogis-dark-hljs;
+  }
+}
+
+:root[data-theme="dark"] {
+  @include ogis-dark-hljs;
+}
