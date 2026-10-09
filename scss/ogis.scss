@@ -1,0 +1,23 @@
+// OGIS theme — SASS entry point.
+//
+// Compiled to public/assets/css/ogis.css: the single hosted OpenGIS
+// stylesheet. It carries every customisation — design tokens, Pico
+// overrides, base elements, layout, components and the highlight.js syntax
+// palette. Consumers load their own Pico CSS first, then this stylesheet:
+//
+//   pico (consumer's own copy) -> ogis.css
+//
+// The partials below make provenance obvious from the filesystem:
+//   _tokens.scss     --ogis-* design tokens (theme-independent, light, dark)
+//   _pico.scss       every --pico-* variable override (Pico-specific)
+//   _base.scss       element and typography overrides
+//   _layout.scss     page structure: bands, header, nav, footer
+//   _components.scss docs components and the background-map widget
+//   _hljs.scss       highlight.js syntax token palette (highlight.js-specific)
+
+@use "tokens";
+@use "pico";
+@use "base";
+@use "layout";
+@use "components";
+@use "hljs";
