@@ -14,9 +14,10 @@ export const CANVAS_CLASS = "background-map__canvas";
 // at runtime — nothing is vendored into this repository. The URLs are pinned
 // so the component keeps working even if the project's `latest` alias moves.
 export const DEPENDENCIES = {
-  css: "https://www.ogis.org/waymark-js/dist/latest/css/waymark-js.min.css",
+  css: "https://www.ogis.org/waymark-js/v1/dist/latest/css/waymark-js.min.css",
   jquery: "https://code.jquery.com/jquery-3.7.1.min.js",
-  waymark: "https://www.ogis.org/waymark-js/dist/latest/js/waymark-js.min.js",
+  waymark:
+    "https://www.ogis.org/waymark-js/v1/dist/latest/js/waymark-js.min.js",
 };
 
 export const TILE_LAYER = {
