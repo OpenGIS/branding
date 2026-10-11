@@ -1,7 +1,8 @@
 import { defineConfig, loadEnv } from "vite";
 
 // Canonical URL fallback when `VITE_PRODUCTION_URL` is unset (see `.env.example`).
-const DEFAULT_PRODUCTION_URL = "https://www.ogis.org";
+// The site is a GitHub Pages project page served under the /branding/ sub-path.
+const DEFAULT_PRODUCTION_URL = "https://www.ogis.org/branding";
 
 // Replace the `%VITE_PRODUCTION_URL%` placeholder in index.html with the
 // resolved production URL. This runs as a pre transform so it resolves the
