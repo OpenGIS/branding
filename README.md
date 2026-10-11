@@ -7,7 +7,7 @@ One hosted stylesheet carries Pico CSS, the OpenGIS theme and the syntax palette
 Link the stylesheet; it bundles Pico CSS, the OpenGIS theme and the highlight.js syntax palette, so one request styles the whole page:
 
 ```html
-<link rel="stylesheet" href="https://www.ogis.org/assets/css/ogis.css" />
+<link rel="stylesheet" href="https://www.ogis.org/branding/assets/css/ogis.css" />
 ```
 
 Code highlighting needs a highlight.js runtime, supplied by the consumer:
@@ -23,7 +23,7 @@ Paint a decorative random-country background map into any sized block:
 
 ```html
 <div data-background-map style="height: 220px"></div>
-<script src="https://www.ogis.org/assets/js/background-map.js" defer></script>
+<script src="https://www.ogis.org/branding/assets/js/background-map.js" defer></script>
 ```
 
 The default is to load from the ogis.org domain; forking or self-hosting takes one env value (`VITE_PRODUCTION_URL`), which drives the page canonical link and the example URLs.
