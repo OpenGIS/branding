@@ -42,6 +42,40 @@ npm run format   # Prettier write; format:check verifies
 - **`src/`** — ESM modules. `ui/` covers sticky nav, scrollspy, heading anchors, theme switch and code copy; `background-map/` is exported. `vite.exports.config.js` with `scripts/build-exports.mjs` builds the exports to `assets/js/<name>.js` IIFE globals.
 - **`.env.example`** — defines `VITE_PRODUCTION_URL`; copy it to `.env`.
 
+## Screenshots
+
+The styleguide in full, captured top to bottom:
+
+<a href="screenshots/home.png"><img src="screenshots/home.png" alt="Full-page OpenGIS styleguide" width="480"></a>
+
+Each band is captured on its own; `npm test` regenerates the whole set.
+
+<details>
+<summary>Section screenshots</summary>
+
+| Band                                                                                                                                                                                 | Band                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="screenshots/section-hero.png"><img src="screenshots/section-hero.png" alt="Hero band with the styleguide title and introduction" width="300"></a><br>Hero                   | <a href="screenshots/section-quick-start.png"><img src="screenshots/section-quick-start.png" alt="Quick Start band with the stylesheet and highlight.js snippets" width="300"></a><br>Quick Start             |
+| <a href="screenshots/section-map-bg.png"><img src="screenshots/section-map-bg.png" alt="Map BG band showing the decorative random-country background map" width="300"></a><br>Map BG | <a href="screenshots/section-logo.png"><img src="screenshots/section-logo.png" alt="Logo band showing the OGIS logo set" width="300"></a><br>Logo                                                             |
+| <a href="screenshots/section-palette.png"><img src="screenshots/section-palette.png" alt="Palette band showing the colour swatches" width="300"></a><br>Palette                      | <a href="screenshots/section-dark-light.png"><img src="screenshots/section-dark-light.png" alt="Dark vs Light band comparing both colour schemes" width="300"></a><br>Dark vs Light                           |
+| <a href="screenshots/section-typography.png"><img src="screenshots/section-typography.png" alt="Typography band showing headings, text and lists" width="300"></a><br>Typography     | <a href="screenshots/section-forms.png"><img src="screenshots/section-forms.png" alt="Forms band showing inputs, selects and buttons" width="300"></a><br>Forms                                               |
+| <a href="screenshots/section-code.png"><img src="screenshots/section-code.png" alt="Code band showing highlighted code blocks" width="300"></a><br>Code                              | <a href="screenshots/section-dependencies.png"><img src="screenshots/section-dependencies.png" alt="Dependencies band listing Pico CSS, highlight.js, jQuery and Waymark JS" width="300"></a><br>Dependencies |
+
+</details>
+
+## Testing
+
+A Playwright smoke suite loads each page in Chromium, waits for the load event and fonts, checks the UI modules initialised, then captures full-page screenshots of the page and each top-level band:
+
+```
+npx playwright install chromium  # one-time browser install
+npm test                         # run the suite
+```
+
+- The suite starts its own isolated Vite dev server on a dedicated port, so it never collides with a running `npm run dev`.
+- Chromium is the only configured browser.
+- Screenshots are written to `screenshots/` and tracked in git, so visual changes appear in review diffs.
+
 ## Dependencies
 
 - [Pico CSS](https://github.com/picocss/pico) — bundled into `ogis.css`.
