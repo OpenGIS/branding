@@ -1,10 +1,10 @@
-# OpenGIS Branding
+# Open GIS Branding
 
-One hosted stylesheet carries Pico CSS, the OpenGIS theme and the syntax palette — consumed by linking it (and optionally the JS exports).
+One hosted stylesheet carries Pico CSS, the Open GIS theme and the syntax palette — consumed by linking it (and optionally the JS exports).
 
 ## Quick Start
 
-Link the stylesheet; it bundles Pico CSS, the OpenGIS theme and the highlight.js syntax palette, so one request styles the whole page:
+Link the stylesheet; it bundles Pico CSS, the Open GIS theme and the highlight.js syntax palette, so one request styles the whole page:
 
 ```html
 <link rel="stylesheet" href="https://www.ogis.org/branding/assets/css/ogis.css" />
@@ -28,6 +28,14 @@ Paint a decorative random-country background map into any sized block:
 
 The default is to load from the ogis.org domain; forking or self-hosting takes one env value (`VITE_PRODUCTION_URL`), which drives the page canonical link and the example URLs.
 
+## Name
+
+Always write the organisation as **Open GIS** — two words, both capitalised.
+
+Use one of two approved forms: the name (plain or linked) or the linked domain [`ogis.org`](https://www.ogis.org). Link the first mention on each page to <https://www.ogis.org>.
+
+Never write `opengis`, `OpenGIS`, `open gis`, `Opengis` or `OPEN GIS` as a name. Lowercase `ogis` is for code-facing identifiers: `ogis.css`, `--ogis-*`, `tile.ogis.org`, and package or repository names. The letter grid in the logo is a mark, not a written reference.
+
 ## Local development
 
 ```
@@ -46,20 +54,21 @@ npm run format   # Prettier write; format:check verifies
 
 The styleguide in full, captured top to bottom:
 
-<a href="screenshots/home.png"><img src="screenshots/home.png" alt="Full-page OpenGIS styleguide" width="480"></a>
+<a href="screenshots/home.png"><img src="screenshots/home.png" alt="Full-page Open GIS styleguide" width="480"></a>
 
 Each band is captured on its own; `npm test` regenerates the whole set.
 
 <details>
 <summary>Section screenshots</summary>
 
-| Band                                                                                                                                                                                 | Band                                                                                                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="screenshots/section-hero.png"><img src="screenshots/section-hero.png" alt="Hero band with the styleguide title and introduction" width="300"></a><br>Hero                   | <a href="screenshots/section-quick-start.png"><img src="screenshots/section-quick-start.png" alt="Quick Start band with the stylesheet and highlight.js snippets" width="300"></a><br>Quick Start             |
-| <a href="screenshots/section-map-bg.png"><img src="screenshots/section-map-bg.png" alt="Map BG band showing the decorative random-country background map" width="300"></a><br>Map BG | <a href="screenshots/section-logo.png"><img src="screenshots/section-logo.png" alt="Logo band showing the OGIS logo set" width="300"></a><br>Logo                                                             |
-| <a href="screenshots/section-palette.png"><img src="screenshots/section-palette.png" alt="Palette band showing the colour swatches" width="300"></a><br>Palette                      | <a href="screenshots/section-dark-light.png"><img src="screenshots/section-dark-light.png" alt="Dark vs Light band comparing both colour schemes" width="300"></a><br>Dark vs Light                           |
-| <a href="screenshots/section-typography.png"><img src="screenshots/section-typography.png" alt="Typography band showing headings, text and lists" width="300"></a><br>Typography     | <a href="screenshots/section-forms.png"><img src="screenshots/section-forms.png" alt="Forms band showing inputs, selects and buttons" width="300"></a><br>Forms                                               |
-| <a href="screenshots/section-code.png"><img src="screenshots/section-code.png" alt="Code band showing highlighted code blocks" width="300"></a><br>Code                              | <a href="screenshots/section-dependencies.png"><img src="screenshots/section-dependencies.png" alt="Dependencies band listing Pico CSS, highlight.js, jQuery and Waymark JS" width="300"></a><br>Dependencies |
+| Band                                                                                                                                                                                                          | Band                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="screenshots/section-hero.png"><img src="screenshots/section-hero.png" alt="Hero band with the styleguide title and introduction" width="300"></a><br>Hero                                            | <a href="screenshots/section-quick-start.png"><img src="screenshots/section-quick-start.png" alt="Quick Start band with the stylesheet and highlight.js snippets" width="300"></a><br>Quick Start |
+| <a href="screenshots/section-map-bg.png"><img src="screenshots/section-map-bg.png" alt="Map BG band showing the decorative random-country background map" width="300"></a><br>Map BG                          | <a href="screenshots/section-logo.png"><img src="screenshots/section-logo.png" alt="Logo band showing the Open GIS logo set" width="300"></a><br>Logo                                             |
+| <a href="screenshots/section-name.png"><img src="screenshots/section-name.png" alt="Name band showing the approved Open GIS references" width="300"></a><br>Name                                              | <a href="screenshots/section-palette.png"><img src="screenshots/section-palette.png" alt="Palette band showing the colour swatches" width="300"></a><br>Palette                                   |
+| <a href="screenshots/section-dark-light.png"><img src="screenshots/section-dark-light.png" alt="Dark vs Light band comparing both colour schemes" width="300"></a><br>Dark vs Light                           | <a href="screenshots/section-typography.png"><img src="screenshots/section-typography.png" alt="Typography band showing headings, text and lists" width="300"></a><br>Typography                  |
+| <a href="screenshots/section-forms.png"><img src="screenshots/section-forms.png" alt="Forms band showing inputs, selects and buttons" width="300"></a><br>Forms                                               | <a href="screenshots/section-code.png"><img src="screenshots/section-code.png" alt="Code band showing highlighted code blocks" width="300"></a><br>Code                                           |
+| <a href="screenshots/section-dependencies.png"><img src="screenshots/section-dependencies.png" alt="Dependencies band listing Pico CSS, highlight.js, jQuery and Waymark JS" width="300"></a><br>Dependencies |                                                                                                                                                                                                   |
 
 </details>
 
@@ -73,6 +82,7 @@ npm test                         # run the suite
 ```
 
 - The suite starts its own isolated Vite dev server on a dedicated port, so it never collides with a running `npm run dev`.
+- It asserts the `Open GIS Styleguide` title and fails if prose in the other bands uses an unapproved spelling of the name.
 - Chromium is the only configured browser.
 - Screenshots are written to `screenshots/` and tracked in git, so visual changes appear in review diffs.
 

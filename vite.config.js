@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           // Pin the compiled stylesheet to the stable consumer URL. The build
-          // emits one CSS asset (Pico + the OpenGIS theme); JS keeps its default
+          // emits one CSS asset (Pico + the Open GIS theme); JS keeps its default
           // content-hashed name.
           assetFileNames: (assetInfo) =>
             (assetInfo.names ?? []).some((name) => name.endsWith(".css"))
