@@ -63,10 +63,18 @@ main > :is(p, ul, ol),
 }
 
 main a {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
   text-underline-offset: 0.15em;
   transition:
     color 0.15s ease,
     text-decoration-color 0.15s ease;
+}
+
+main a:hover,
+main a:focus-visible {
+  text-decoration-style: solid;
 }
 
 a:focus-visible,
@@ -90,19 +98,24 @@ button:focus-visible,
 }
 
 // Heading anchors: the whole heading links to itself. Restrained by default —
-// it inherits the heading colour and only reveals the accent underline on
-// hover or keyboard focus.
+// it inherits the heading colour and only reveals the orange hash on hover or
+// keyboard focus.
 .heading-anchor {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.2em;
-  transition: text-decoration-color 0.15s ease;
+  text-decoration: none;
 }
 
-.heading-anchor:hover,
-.heading-anchor:focus-visible {
-  text-decoration-color: var(--ogis-accent);
+.heading-anchor::after {
+  content: "#" / "";
+  margin-left: 0.35em;
+  color: var(--ogis-orange);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.heading-anchor:hover::after,
+.heading-anchor:focus-visible::after {
+  opacity: 1;
 }
 
 hr {

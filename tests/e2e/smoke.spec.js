@@ -35,8 +35,13 @@ for (const pageItem of pages) {
     });
 
     // The heading anchors are injected by `src/ui/heading-anchors.js`, so their
-    // presence proves the page's module graph has initialised.
-    await expect(page.locator("main .heading-anchor").first()).toBeVisible();
+    // presence proves the page's module graph has initialised. Target an
+    // injected anchor rather than the static styleguide demo in Typography.
+    await expect(
+      page
+        .locator("main > section.ogis-band:has(> h1) > h1 > .heading-anchor")
+        .first(),
+    ).toBeVisible();
     await expect(page).toHaveTitle(/OpenGIS Styleguide/);
     await expect(page.locator("main h1").first()).toBeVisible();
 
